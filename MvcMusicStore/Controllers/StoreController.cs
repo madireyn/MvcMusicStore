@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using MvcMusicStore.Models;
 
@@ -10,14 +13,17 @@ namespace MvcMusicStore.Controllers
 
         //
         // GET: /Store/
+
         public ActionResult Index()
         {
-            // making list of genres from SampleData.cs instead now 
-            var genres = storeDB.Genres.ToList(); 
+            var genres = storeDB.Genres.ToList();
+
             return View(genres);
         }
+
         //
         // GET: /Store/Browse?genre=Disco
+
         public ActionResult Browse(string genre)
         {
             // Retrieve Genre and its Associated Albums from database
@@ -26,12 +32,27 @@ namespace MvcMusicStore.Controllers
 
             return View(genreModel);
         }
+
         //
-        // GET: /Store/Details
+        // GET: /Store/Details/5
+
         public ActionResult Details(int id)
         {
             var album = storeDB.Albums.Find(id);
+
             return View(album);
         }
+
+        //
+        // GET: /Store/GenreMenu
+
+        [ChildActionOnly]
+        public ActionResult GenreMenu()
+        {
+            var genres = storeDB.Genres.ToList();
+
+            return PartialView(genres);
+        }
+
     }
 }
