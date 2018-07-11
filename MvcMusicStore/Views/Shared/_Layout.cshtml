@@ -15,10 +15,12 @@
 
         <li>@Html.ActionLink("Home", "Index", "Home")</li>
         <li>@Html.ActionLink("Store", "Index", "Store")</li>
+        <li>@{Html.RenderAction("CartSummary", "ShoppingCart");}</li>
         <li>@Html.Partial("_LoginPartial")</li>
     </ul>
 
 </div>
+@{Html.RenderAction("GenreMenu", "Store");}
 <div id="main">
     @RenderBody()
 </div>
@@ -29,3 +31,4 @@
 @RenderSection("scripts", required: false)
 </body>
 </html>
+
